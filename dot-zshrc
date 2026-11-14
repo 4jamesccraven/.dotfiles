@@ -1,0 +1,121 @@
+# Checks if the provided argument is installed and executable.
+is-installed() {
+    command -v "$1" > /dev/null 2>&1
+}
+
+autoload -Uz compinit && compinit
+
+HISTSIZE="10000"
+SAVEHIST="10000"
+HISTFILE="$HOME/.zhist"
+
+set_opts=(
+  HIST_FCNTL_LOCK HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY
+  NO_APPEND_HISTORY NO_EXTENDED_HISTORY NO_HIST_EXPIRE_DUPS_FIRST
+  NO_HIST_FIND_NO_DUPS NO_HIST_IGNORE_ALL_DUPS NO_HIST_SAVE_NO_DUPS
+  AUTO_PARAM_SLASH CDABLE_VARS CD_SILENT CORRECT
+)
+for opt in "${set_opts[@]}"; do
+  setopt "$opt"
+done
+unset opt set_opts
+
+# Use vim keybinds
+bindkey -v
+
+# Disable inserting tab at the beginning of a line
+zstyle ':completion:*' insert-tab false
+
+# ---[ Directory Hashes ]---
+hash -d dw="$HOME/Downloads"
+hash -d cfg="$HOME/.config"
+
+# ---[ Aliases & Application-Specific ]---
+alias c=clear
+if is-installed nvim; then
+    alias vi=nvim
+    alias vim=nvim
+    export EDITOR=nvim
+    export MANPAGER='nvim +Man!'
+fi
+
+if is-installed git; then
+    # :> Init
+    alias gc='git clone'
+    alias gi='git init'
+
+    # :> Modify
+    alias ga='git add . --all'
+    alias gcm='git commit'
+    alias gr='git restore'
+
+    # :> Branch
+    alias gb='git branch'
+    alias gco='git checkout'
+    alias gsw='git switch'
+
+    # :> Stats
+    alias ggr='cd $(git rev-parse --show-toplevel)'
+    alias gs='git status'
+    alias gd='git diff HEAD'
+    alias gl='git log --stat'
+
+    # :> Remote
+    alias gp='git push origin HEAD'
+    alias gf='git fetch'
+    alias gfp='git fetch --prune'
+    alias gu='git pull'
+
+    # :> Info
+    alias gitaliases='alias | grep git | grep -v gitaliases | sed '\''s/ *= */ = /'\'' | column -t -s='
+fi
+
+if is-installed fzf; then
+    source <(fzf --zsh)
+    bindkey "^f" fzf-history-widget
+fi
+
+if is-installed yazi; then
+    alias y=yazi
+fi
+
+if is-installed fastfetch; then
+    alias ff='fastfetch'
+    alias cff='clear; fastfetch'
+fi
+
+if is-installed lsd; then
+    alias ls=lsd
+    alias ll='ls -l'
+    alias la='ls -A'
+    alias lla='ls -lA'
+    alias lt='ls --tree'
+    alias llt='ls -l --tree'
+else
+    alias ls='ls --color=auto --group-directories-first'
+    alias ll='ls -lh'
+    alias la='ls -A'
+    alias lla='ls -lhA'
+fi
+
+# ---[ Prompt & Local Overrides ]---
+PROMPT="%n%F{green}@%m [%f%~%F{green}]
+=>%f "
+[[ -f "$HOME/.zshrc-local" ]] && source "$HOME/.zshrc-local"
+
+# ---[ Plugins ]---
+zsh_plug="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [[ -f "$zsh_plug" ]]; then
+    source "$zsh_plug"
+    ZSH_AUTOSUGGEST_STRATEGY=(history)
+    bindkey "^a" autosuggest-accept
+fi
+zsh_plug="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ -f "$zsh_plug" ]]; then
+    source "$zsh_plug"
+    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets regexp main)
+fi
+unset zsh_plug
+
+if is-installed fastfetch; then fastfetch; fi
+unfunction is-installed

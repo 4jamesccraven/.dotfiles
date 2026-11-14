@@ -1,0 +1,6 @@
+[core]
+	editor = "nvim"
+
+[user]
+	email = "4jamesccraven@gmail.com"
+	name = "4jamesccraven"

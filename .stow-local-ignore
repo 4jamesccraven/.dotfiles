@@ -1,0 +1,21 @@
+# Default GNU Stow ignores
+.+,v
+\.\#.+
+\.cvsignore
+\.svn
+_darcs
+\.hg
+\.git
+\.gitignore
+.+~
+#*#
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# Custom local ignores
+\.gitmodules
+\.nvim.lua
+^install$
+^prime$
+^Makefile$
