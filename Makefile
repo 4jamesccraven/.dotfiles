@@ -7,7 +7,7 @@ NVIM_TARGET := $(XDG_CONFIG_HOME)/nvim
 STOW_FLAGS := --dotfiles --no-folding --verbose
 NVIM_STOW_FLAGS := --no-folding --verbose
 
-.PHONY: install unstow
+.PHONY: install uninstall
 
 install:
 	@stow $(STOW_FLAGS) .
