@@ -5,15 +5,19 @@ is-installed() {
 
 autoload -Uz compinit && compinit
 
+# ---[ History & Opts ]---
+
 HISTSIZE="10000"
 SAVEHIST="10000"
 HISTFILE="$HOME/.zhist"
 
 set_opts=(
-  HIST_FCNTL_LOCK HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY
-  NO_APPEND_HISTORY NO_EXTENDED_HISTORY NO_HIST_EXPIRE_DUPS_FIRST
-  NO_HIST_FIND_NO_DUPS NO_HIST_IGNORE_ALL_DUPS NO_HIST_SAVE_NO_DUPS
-  AUTO_PARAM_SLASH CDABLE_VARS CD_SILENT CORRECT
+    # :> Nix History Defaults
+    HIST_FCNTL_LOCK HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY
+    NO_APPEND_HISTORY NO_EXTENDED_HISTORY NO_HIST_EXPIRE_DUPS_FIRST
+    NO_HIST_FIND_NO_DUPS NO_HIST_IGNORE_ALL_DUPS NO_HIST_SAVE_NO_DUPS
+    # :> Misc
+    AUTO_PARAM_SLASH CDABLE_VARS CD_SILENT CORRECT
 )
 for opt in "${set_opts[@]}"; do
   setopt "$opt"
@@ -29,6 +33,7 @@ zstyle ':completion:*' insert-tab false
 # ---[ Directory Hashes ]---
 hash -d dw="$HOME/Downloads"
 hash -d cfg="$HOME/.config"
+hash -d dots="$HOME/.dotfiles"
 
 # ---[ Aliases & Application-Specific ]---
 alias c=clear
