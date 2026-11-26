@@ -16,6 +16,7 @@ _darcs
 # Custom local ignores
 \.gitmodules
 \.nvim.lua
+config.local.mk
 ^install$
 ^prime$
 ^Makefile$
