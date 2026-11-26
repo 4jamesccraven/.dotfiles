@@ -1,0 +1,14 @@
+%YAML 1.1
+---
+blocks:
+- permission
+- user
+- group
+- date
+- size
+- name
+date: +%D
+sorting:
+  dir-grouping: first
+symlink-arrow: ->
+

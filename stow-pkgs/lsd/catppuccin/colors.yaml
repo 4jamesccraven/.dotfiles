@@ -1,0 +1,41 @@
+%YAML 1.1
+---
+date:
+  day-old: '#89dceb'
+  hour-old: '#94e2d5'
+  older: '#74c7ec'
+git-status:
+  conflicted: '#f38ba8'
+  default: '#cdd6f4'
+  deleted: '#f38ba8'
+  ignored: '#a6adc8'
+  modified: '#f9e2af'
+  new-in-index: '#a6e3a1'
+  new-in-workdir: '#a6e3a1'
+  renamed: '#a6e3a1'
+  typechange: '#f9e2af'
+  unmodified: '#a6adc8'
+group: '#b4befe'
+inode:
+  invalid: '#a6adc8'
+  valid: '#f5c2e7'
+links:
+  invalid: '#a6adc8'
+  valid: '#f5c2e7'
+permission:
+  acl: '#94e2d5'
+  context: '#89dceb'
+  exec: '#eba0ac'
+  exec-sticky: '#cba6f7'
+  no-access: '#a6adc8'
+  octal: '#94e2d5'
+  read: '#a6e3a1'
+  write: '#f9e2af'
+size:
+  large: '#fab387'
+  medium: '#f9e2af'
+  none: '#a6adc8'
+  small: '#a6e3a1'
+tree-edge: '#bac2de'
+user: '#cba6f7'
+
